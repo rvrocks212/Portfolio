@@ -1,5 +1,6 @@
 document.onreadystatechange = function() {
-  if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+  
+  if (sessionStorage.getItem("firstLoad") !== "true" || performance.navigation.type === performance.navigation.TYPE_RELOAD) {
       if (document.readyState !== 'complete') {
           document.querySelector("body").style.overflow = "hidden";
           document.querySelector("body").style.visibility = "hidden";
@@ -9,18 +10,23 @@ document.onreadystatechange = function() {
               document.querySelector("#loader").style.display = "none";
               document.querySelector("body").style.overflow = "auto";
               document.querySelector("body").style.visibility = "visible";
+
               
               gsap.to('.char', {
                   y: 0,
                   stagger: 0.05,
                   duration: .1
               });
+
+             
+              sessionStorage.setItem("firstLoad", "true");
           }, 7000);
       }
   } else {
       document.querySelector("#loader").style.display = "none";
       document.querySelector("body").style.overflow = "auto";
       document.querySelector("body").style.visibility = "visible";
+
       
       gsap.to('.char', {
           y: 0,
@@ -29,6 +35,7 @@ document.onreadystatechange = function() {
       });
   }
 };
+
 
 
 
@@ -56,6 +63,10 @@ const lenis= new Lenis()
 
 function raf(time){
   lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFramer(raf);
   requestAnimationFrame(raf);
 }
 
