@@ -227,6 +227,12 @@
 
         const myText = new SplitType('.hero span')
 
+        gsap.to('.char', {
+            y: 0,
+            stagger: 0.05,
+            delay: 7.05,
+            duration: .1
+        });
 
         gsap.registerPlugin(ScrollTrigger);
         gsap.to(".about p",{
