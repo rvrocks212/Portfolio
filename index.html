@@ -61,9 +61,8 @@
                 </div>
             </div>
             <div class="hero">
-                <h1>Rajath Vinod</h1>
+                <span>Rajath Vinod</span>     
             </div>
-            
         </div>
         <div class="about" id="about1">
             <h1>ABOUT</h1>
@@ -98,9 +97,9 @@
                 <ul>
                     <li>
                         <div class="project" id="p1">
-                            <h1>
+                            <a href="https://github.com/rvrocks212/Chit-Chat">
                                 Chit-Chat
-                            </h1>
+                            </a>
                             <p>
                                 A full-stack web application featuring a React frontend and a Node.js backend. Socket.io for real-time communication and MongoDB to securely store user details in an encrypted format.
                             </p>
@@ -114,32 +113,32 @@
                     </li>
                     <li>
                         <div class="project" id="p2">
-                            <h1>
+                            <a href="https://github.com/rvrocks212/Sorting-Visualizer">
                                 Sorting-Visualizer
-                            </h1>
+                            </a>
                             <p>
                                 A web-based sorting algorithm visualizer featuring implemented sorting algorithms and dynamic visualization for real-time feedback.
                             </p>
                             <p>
                                 Tech Stack: HTML, CSS, JavaScript
                             </p>
-                            <div class="hover-reveal image01">
+                            <div class="hover-reveal image02">
                                 <img class="hidden-img" src="images/sort.png" alt="">
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="project" id="p3">
-                            <h1>
+                            <a href="https://github.com/rvrocks212/Dashboard">
                                 Dashboard
-                            </h1>
+                            </a>
                             <p>
                                 A sleek dashboard interface which includes data visualization for actionable insights.
                             </p>
                             <p>
                                 Tech Stack: HTML, CSS, JavaScript
                             </p>
-                            <div class="hover-reveal image01">
+                            <div class="hover-reveal image03">
                                 <img class="hidden-img" src="images/mydashboard.png" alt="">
                             </div>
                         </div>
@@ -170,7 +169,7 @@
                     <div>
                       <button type="submit">Send <img src="images/send.png" alt="" height="15"></button>
                     </div>
-                    </form>
+                </form>
             </div>
         </div>
         
@@ -180,6 +179,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/split-type"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
     <script>
         gsap.from(".clip-top, .clip-bottom", 2,{
             delay: 1,
@@ -223,19 +223,10 @@
             ease:"power2.inOut",
         });
 
-        gsap.fromTo(".loader",{opacity:1},{
-            opacity:0,
-            delay:7
-        });
+        
 
-        const myText = new SplitType('.hero h1')
+        const myText = new SplitType('.hero span')
 
-        gsap.to('.char', {
-            y: 0,
-            stagger: 0.05,
-            delay: 7.2,
-            duration: .1
-        });
 
         gsap.registerPlugin(ScrollTrigger);
         gsap.to(".about p",{
@@ -245,7 +236,7 @@
                 trigger: ".about p",
                 scrub: 1,
                 start: "top bottom",
-                end: "205px center",
+                end: "100px center",
             },
         });
 
@@ -293,6 +284,87 @@
                 end: "300px center",
             },
         });
+        document.addEventListener("DOMContentLoaded",function(){
+            gsap.to(".container",{
+                scrollTrigger:{
+                    trigger:".container",
+                    start:"top top",
+                    end:()=>"+=" + (window.innerHeight + document.querySelector(".about").offsetHeight * 0.5),
+                    scrub:1,
+                    pin:true,
+                },
+                y:250,
+                scale:0.75,
+                rotation:-15,
+                ease:"power3.out",
+            });
+        });
+        gsap.from(".about",
+            {
+                x:-100,
+                scale:0.3,
+                rotation:20,
+                scrollTrigger:{
+                    trigger:".about",
+                    start: "top 200%",
+                    end:"top 50%",
+                    scrub:1,
+                },
+            }
+            );
+        gsap.registerPlugin(ScrollTrigger);
+
+
+        function animateText(element) {
+            let originalText = element.textContent; 
+            let index = 0; 
+
+
+            const shuffleInterval = setInterval(() => {
+                if (index < originalText.length) {
+                    let shuffledText = "";
+
+                    
+                    for (let i = 0; i <= index; i++) {
+                        shuffledText += i < index ? originalText[i] : Math.random().toString(36)[2];
+                    }
+
+                
+                    element.textContent = shuffledText + originalText.substring(index + 1);
+                    index++;
+                } else {
+                    
+                    clearInterval(shuffleInterval);
+                    element.textContent = originalText;
+                }
+            }, 20); 
+        }
+
+
+        function initScrollAnimations() {
+        
+            const elementsToAnimate = document.querySelectorAll(".works .project a, .works .project p");
+
+            elementsToAnimate.forEach((element) => {
+                let hasAnimated = false;
+
+                
+                ScrollTrigger.create({
+                    trigger: ".works",
+                    start: "top 100%", 
+                    onEnter: () => {
+                        if (!hasAnimated) {
+                            animateText(element);
+                            hasAnimated = true;
+                        }
+                    }
+                });
+            });
+        }
+
+
+        initScrollAnimations();
+
     </script>
     </body>
 </html>
