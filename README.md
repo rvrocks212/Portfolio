@@ -14,7 +14,7 @@ A personal portfolio website to showcase my skills, projects, and experience.
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/portfolio-website.git](https://github.com/rvrocks212/Portfolio.git
+   git clone https://github.com/rvrocks212/Portfolio.git
 2. Open index.html in your browser
 
 ## Screenshots
