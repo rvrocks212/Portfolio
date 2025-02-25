@@ -43,4 +43,4 @@ function raf(time){
   requestAnimationFrame(raf);
 }
 
-requestAnimationFramer(raf);
+requestAnimationFrame(raf);
