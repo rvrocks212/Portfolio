@@ -4,6 +4,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+	 overflow-x: hidden;
 }
 
 html,body{
@@ -11,10 +12,6 @@ html,body{
     margin: 0;
     background: url(./images/4060492.jpg);
     scroll-behavior: smooth;
-}
-
-body{
-    overflow-x: hidden;
 }
 
 .loader{
